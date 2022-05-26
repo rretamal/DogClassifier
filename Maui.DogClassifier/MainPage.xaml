@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Maui.DogClassifier.MainPage">
+			 
+    <ScrollView>
+        <VerticalStackLayout 
+            Spacing="25" 
+            Padding="10,0" 
+            VerticalOptions="Center">
+
+            <Image
+                Source="dotnet_bot.png"
+                SemanticProperties.Description="Cute dot net bot waving hi to you!"
+                HeightRequest="150"
+                HorizontalOptions="Center" />
+                
+            <Label 
+                Text="Hello, Dog!"
+                SemanticProperties.HeadingLevel="Level1"
+                FontSize="30"
+                HorizontalOptions="Center" />
+            
+            <Label 
+                Text="Please take a picture of your dog"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Please take a picture of your dog"
+                FontSize="18"
+                HorizontalOptions="Center" />
+
+            <Button Text="Take picture" x:Name="btnCapture" />
+
+            <Image x:Name="imgCapture" IsVisible="false" HeightRequest="300"/>
+
+            <Label 
+                x:Name="lblResult"
+                Text="It's a !"
+                SemanticProperties.HeadingLevel="Level2"
+                FontSize="18"
+                HorizontalOptions="Center" IsVisible="false"/>
+
+
+        </VerticalStackLayout>
+    </ScrollView>
+ 
+</ContentPage>
