@@ -10,6 +10,7 @@
             VerticalOptions="Center">
 
             <Image
+                x:Name="imgCapture"
                 Source="dotnet_bot.png"
                 SemanticProperties.Description="Cute dot net bot waving hi to you!"
                 HeightRequest="150"
@@ -28,16 +29,14 @@
                 FontSize="18"
                 HorizontalOptions="Center" />
 
-            <Button Text="Take picture" x:Name="btnCapture" />
-
-            <Image x:Name="imgCapture" IsVisible="false" HeightRequest="300"/>
+            <Button Text="Take picture" x:Name="btnCapture" Clicked="BtnCapture_Clicked" />
 
             <Label 
                 x:Name="lblResult"
                 Text="It's a !"
                 SemanticProperties.HeadingLevel="Level2"
                 FontSize="18"
-                HorizontalOptions="Center" IsVisible="false"/>
+                HorizontalOptions="Center" IsVisible="true"/>
 
 
         </VerticalStackLayout>
