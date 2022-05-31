@@ -50,7 +50,6 @@
 	<ItemGroup>
 	  <None Remove="Resources\Raw\labels.txt" />
 	  <None Remove="Resources\Raw\model.tflite" />
-	  <None Remove="Resources\Raw\model_quant.tflite" />
 	</ItemGroup>
 
 	<ItemGroup>

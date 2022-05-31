@@ -33,7 +33,7 @@
 
             <Label 
                 x:Name="lblResult"
-                Text="It's a !"
+                Text=""
                 SemanticProperties.HeadingLevel="Level2"
                 FontSize="18"
                 HorizontalOptions="Center" IsVisible="true"/>

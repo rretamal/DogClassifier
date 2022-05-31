@@ -12,9 +12,11 @@ namespace Maui.DogClassifier.Core
         private MappedByteBuffer model;
         private List<string> labels;
         private Org.Tensorflow.Lite.Interpreter interpreter;
+        private int batchSize = 1;
         private int floatSize = 4;
         private int pixelSize = 3;
-
+        private int imageMean = 128;
+        private float imageStd = 128.0f;
         public Classifier()
         {
             model = LoadModel();
@@ -75,7 +77,7 @@ namespace Maui.DogClassifier.Core
             var streamReader = new StreamReader(assets.Open("labels.txt"));
 
             //Transform labels.txt into List<string>
-            var labels = streamReader.ReadToEnd().Split('\n').ToList();
+            var labels = streamReader.ReadToEnd().Split('\n').Select(c => c.Split('-')[1]).ToList();
 
             return labels;
         }
@@ -99,16 +101,15 @@ namespace Maui.DogClassifier.Core
             byte[] byteArray = byteArrayOutputStream.ToArray();
             String encoded = Base64.EncodeToString(byteArray, Base64Flags.Default);
 
-            //Loop through each pixels to create a Java.Nio.ByteBuffer
             for (var i = 0; i < width; i++)
             {
                 for (var j = 0; j < height; j++)
                 {
                     var pixelVal = pixels[pixel++];
 
-                    byteBuffer.PutFloat(pixelVal >> 16 & 0xFF);
-                    byteBuffer.PutFloat(pixelVal >> 8 & 0xFF);
-                    byteBuffer.PutFloat(pixelVal & 0xFF);
+                    byteBuffer.PutFloat((((pixelVal >> 16) & 0xFF) - imageMean) / imageStd);
+                    byteBuffer.PutFloat((((pixelVal >> 8) & 0xFF) - imageMean) / imageStd);
+                    byteBuffer.PutFloat((((pixelVal) & 0xFF) - imageMean) / imageStd);
                 }
             }
 
@@ -116,5 +117,6 @@ namespace Maui.DogClassifier.Core
 
             return byteBuffer;
         }
+
     }
 }

@@ -5,8 +5,7 @@ using Maui.DogClassifier.Core;
 namespace Maui.DogClassifier;
 
 public partial class MainPage : ContentPage
-{
-	int count = 0;
+{	int count = 0;
 	Classifier classifier;
 
 	public MainPage()
@@ -30,9 +29,10 @@ public partial class MainPage : ContentPage
 
         if (result != null)
         {
-            if (result.Percentage > 0.1)
-            {                
-                lblResult.Text = $"It's a {result.Name}!";
+            if (result.Percentage > 0.7)
+            {
+                lblResult.IsVisible = true;
+                lblResult.Text = $"It's a {result.Name}! ({result.Percentage.ToString()})";
                 return;
             }
         }
@@ -42,13 +42,6 @@ public partial class MainPage : ContentPage
 
     async Task LoadPhotoAsync(FileResult photo)
     {
-        // canceled
-        //if (photo == null)
-        //{
-        //    imgCapture.IsVisible = false;
-        //    return;
-        //}
-
         // save the file into local storage
         var newFile = Path.Combine(FileSystem.CacheDirectory, photo.FileName);
         using (var stream = await photo.OpenReadAsync())
